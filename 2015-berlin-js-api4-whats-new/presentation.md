@@ -14,6 +14,7 @@ Yann Cabon - Andy Gup
 ---
 
 ## 4.0 - highlights
+ - Promises-based
  - 2D/3D
  - 4.0beta2
  - Additional betas coming
@@ -71,16 +72,39 @@ Yann Cabon - Andy Gup
 
 ---
 
+## 2D
+ - new "engine" in the work.
+ - faster, more future proof
+   - abstraction to draw tiles and dynamic images to ease custom layers/layerviews
+   - abstraction to draw in DOM or Canvas, possibly webgl ;-)
+ - display graphics while zooming.
+ - rotation
+ - continous zoom
+ - [vector map tiles](http://blogs.esri.com/esri/arcgis/2015/07/20/vector-tiles-preview/), [basemaps](http://basemapsbeta.arcgis.com/preview/app/index.html)
+
+---
+
+## 3D
+ - webgl engine to display the earth.
+ - [z/m support](http://maps.esri.com/rc/sat/index.html) in the API, tasks, layers...
+ - support for simple symbols
+ - new 3D Symbols
+
+---
+
 Experiment - Map running in node
 ![Map running in node](images/map-node.png)
 
 ---
+
+## 3D
 
 ```javascript
 // create the map and its layers
 var map = new Map({
   basemap: "topo"
 });
+
 map.add(new FeatureLayer(...));
 
 // create a 3D view for the Map
@@ -94,11 +118,28 @@ var view = new SceneView({
 
 ## `esri/core/Accessor`
  - Mixin similar to `dojo/Stateful`
- - single object constructor
  - Consistent pattern for `get()`, `set()`, `watch()`
- - support for ES7 `Object.observe()`
+ - Single object constructor
+ - Support for ES7 `Object.observe()`
 
 ---
+
+## Properties watching
+
+ - Direct benefits:
+   - remove inconsistancies between constructor, getter, setter functions, events
+   - one convention everywhere. _"just need to know what properties for a class"_
+   - Single object constructor, no more 3+ constructors
+   - Leaner SDK: we doc only the properties, the rest is convention
+
+ - Changes:
+   - no more **_property_**-change events, use `watch()`
+   - in 3.x, listen for `extent-change` event.
+   - in 4.0 `extent` watchers will be call very often
+   - new events and properties for animation. 
+
+---
+
 
 ## Properties watching
 
@@ -119,23 +160,6 @@ var view = new SceneView({
 ```
 
 ---
-
-## Properties watching
-
- - Direct benefits:
-   - remove inconsistancies between constructor, getter, setter functions, events
-   - one convention everywhere. _"just need to know what properties for a class"_
-   - Single object constructor, no more 3+ constructors
-   - Leaner SDK: we doc only the properties, the rest is convention
-
- - Changes:
-   - no more **_property_**-change events, use `watch()`
-   - in 3.x, listen for `extent-change` event.
-   - in 4.0 `extent` watchers will be call very often
-   - new events and properties for animation. 
-
----
-
 
 ## Properties watching
 
@@ -167,10 +191,49 @@ var view = new SceneView({
 
  - New layer: GroupLayer
  - group layers together
- - structure your data visualization
+ - structure your data visualization     
  - visibility mode: `exclusive`, `independent`, `inherit`
  - listMode: `hide-children`, `hidden`
- - [demo](demos/grouplayer/index.html)
+ - [demo](demos/grouplayer/index.html)  
+
+---
+
+## GroupLayer
+
+  ```javascript
+    map = new Map({
+      layers: [
+        new ArcGISTiledLayer({
+          title: 'Dark Gray Canvas',
+          url: '//services.arcgisonline.com/arcgis/rest/services/Canvas/World_Dark_Gray_Base/MapServer',
+          //listMode: 'hide',
+        }),
+    
+        new GroupLayer({
+          title: 'USA Tiled Services',
+          visibilityMode: 'exclusive',
+          //listMode: 'hide-children',
+          layers: [
+            new ArcGISTiledLayer({
+              url: '//server.arcgisonline.com/ArcGIS/rest/services/Demographics/USA_Median_Household_Income/MapServer',
+              title: 'Median Household Income',
+              visible: false
+            }),
+            new ArcGISTiledLayer({
+              "url": '//services.arcgisonline.com/ArcGIS/rest/services/Demographics/USA_Tapestry/MapServer',
+              "title": "Tapestry Segmentation",
+              visible: true
+            }),
+            new ArcGISTiledLayer({
+              url: '//server.arcgisonline.com/ArcGIS/rest/services/Demographics/USA_Population_Density/MapServer',
+              title: 'Population Density',
+              visible: false
+            })
+          ]
+        })
+      ]
+    });
+  ``` 
 
 ---
 
@@ -186,7 +249,7 @@ var view = new SceneView({
 ## Basemap
 
 - full fledge class `esri/Basemap`
-- basemap's layers are not part of the `map.layers`, but from `map.basemap`
+- basemap's layers are _not_ part of the `map.layers`, but from `map.basemap`
 - contains 3 Collections: baseLayers, referenceLayers, elevationLayers
 - can be set with
   - [string for esri's basemap](demos/basemap/2d.html)
@@ -222,26 +285,6 @@ var view = new SceneView({
 
   map.basemap = toner;
   ```
-
----
-
-## 2D
- - new "engine" in the work.
- - faster, more future proof
-   - abstraction to draw tiles and dynamic images to ease custom layers/layerviews
-   - abstraction to draw in DOM or Canvas, possibly webgl ;-)
- - display graphics while zooming.
- - rotation
- - continous zoom
- - [vector map tiles](http://blogs.esri.com/esri/arcgis/2015/07/20/vector-tiles-preview/), [basemaps](http://basemapsbeta.arcgis.com/preview/app/index.html)
-
----
-
-## 3D
- - webgl engine to display the earth.
- - [z/m support](http://maps.esri.com/rc/sat/index.html) in the API, tasks, layers...
- - support for simple symbols
- - new 3D Symbols
 
 ---
 
