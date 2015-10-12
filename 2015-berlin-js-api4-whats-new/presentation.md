@@ -307,7 +307,7 @@ var view = new SceneView({
 ## Animation
  - generic function `animateTo(target, options):Promise`
  - customize [easing, duration, chaining](demos/animation/random.html)
- - DIY using [other libs](demos/animation/tweenjs.html) or [custom](demos/whats-next/routing.html)
+ - DIY using [other libs](demos/animation/tweenjs.html)
  - `esri/Viewpoint`: common way to share between 2D/3D
 
 ---
