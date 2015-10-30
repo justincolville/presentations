@@ -5,6 +5,17 @@ Justin Colville
 
 ---
 
+## Javascript
+ - [3.x Developer's Site](https://developers.arcgis.com/javascript/)
+ - [4.0 Beta Developer's Site](https://developers.arcgis.com/javascript/beta/)
+
+---
+
+## Visualization Examples
+ - ...
+
+---
+
 ## 3.x
  - [Geometry Engine](http://developers.arcgis.com/javascript/samples/ge_geodesic_buffers/)
  - [Smart Mapping](http://developers.arcgis.com/javascript/samples/smartmapping_bycolor/)
