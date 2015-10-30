@@ -1,7 +1,7 @@
 
 #ArcGIS API for Javascript
-#What's new in v4
-Yann Cabon - Andy Gup
+
+Justin Colville
 
 ---
 
@@ -377,9 +377,6 @@ var view = new SceneView({
 
 ## Questions
 
- Yann Cabon, @yanncabon
- 
- Andy Gup, @agup, agup@esri.com
 
 --- 
 
