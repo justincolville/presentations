@@ -348,32 +348,8 @@ var view = new SceneView({
 
 ---
 
-## Other
- - legacy dojo loader removed - AMD only
- - classes properly cased: esri/Map, esri/Graphic, esri/layers/Layer
- - new folder structure.
-
----
-
 ## Beta3 ????
  - ?????????????
-
-
----
-
-<!-- .slide: data-background="images/atmosphere.png" -->
-
----
-
-<!-- .slide: data-background="images/atmosphere-realistic.png" -->
-
----
-
-<!-- .slide: data-background="images/subsurface-data.png" -->
-
----
-
-<!-- .slide: data-background="images/subsurface-data-wireframe.png" -->
 
 ---
 
